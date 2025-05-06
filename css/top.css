@@ -1,0 +1,48 @@
+.back-to-top {
+    /* Base styling */
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    
+    /* Responsive sizing */
+    @media (max-width: 768px) {
+      width: 44px;
+      height: 44px;
+      right: 15px;
+      bottom: 15px;
+    }
+    
+    @media (max-width: 480px) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .back-to-top:hover {
+    background: #2563eb;
+    transform: translateY(-3px);
+  }
+  
+  .back-to-top:active {
+    transform: translateY(-1px);
+  }

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .countdown-item {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            margin: 0 10px;
+            color: #2c3e50;
+            font-size: 1.5em;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Coming Soon</h1>
+        <p>We're working hard to bring you something amazing. Stay tuned!</p>
+        
+        <div class="countdown">
+            <div class="countdown-item" id="days">00</div>
+            <div class="countdown-item" id="hours">00</div>
+            <div class="countdown-item" id="minutes">00</div>
+            <div class="countdown-item" id="seconds">00</div>
+        </div>
+        
+        <p>Launching in:</p>
+        
+        <div class="social-links">
+            <a href="#" target="_blank">📧</a>
+            <a href="#" target="_blank">🐦</a>
+            <a href="#" target="_blank">📱</a>
+            <a href="#" target="_blank">💼</a>
+        </div>
+    </div>
+
+    <script>
+        // Set the date we're counting down to (YYYY, MM-1, DD)
+        const launchDate = new Date(2025, 5, 15).getTime();
+        
+        // Update the countdown every 1 second
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display the result
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+            
+            // If the countdown is finished
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.querySelector(".countdown").innerHTML = "<div style='color:#27ae60; font-size: 1.5em;'>We're Live!</div>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
