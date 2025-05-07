@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Company</title>
+    <title>Company Page Loader</title>
     <style>
+        /* Reset to ensure no conflicting margins */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling during load */
+        }
+
         /* Page Loader Styles */
         .page-loader {
             position: fixed;
@@ -17,60 +25,70 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            opacity: 1;
             transition: opacity 0.5s ease-out;
         }
-        
+
         .loader-container {
             position: relative;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        
+
         .loader-logo {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
             z-index: 2;
+            position: relative;
         }
-        
+
         .loader-ring {
             position: absolute;
             width: 100%;
             height: 100%;
-            border: 5px solid transparent;
-            border-top-color: #3498db; /* Change to your brand color */
+            border: 4px solid rgba(52, 152, 219, 0.2); /* Light blue ring */
+            border-top-color: #3498db; /* Animated blue */
             border-radius: 50%;
             animation: spin 1.5s linear infinite;
         }
-        
+
+        /* Secondary ring */
         .loader-ring:nth-child(2) {
-            border-top-color: #f1c40f; /* Secondary color */
-            animation-delay: 0.3s;
             width: 80%;
             height: 80%;
-            top: 10%;
-            left: 10%;
+            border-top-color: #2ecc71; /* Green */
+            animation-duration: 2s;
+            animation-direction: reverse;
         }
-        
+
+        /* Tertiary ring */
         .loader-ring:nth-child(3) {
-            border-top-color: #2ecc71; /* Tertiary color */
-            animation-delay: 0.6s;
             width: 60%;
             height: 60%;
-            top: 20%;
-            left: 20%;
+            border-top-color: #e74c3c; /* Red */
+            animation-duration: 2.5s;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
+        /* Content styles (hidden during load) */
+        .content {
+            display: none;
+        }
+
+        /* Show content when loaded */
+        body.loaded .content {
+            display: block;
+        }
+
         /* Hide loader when loaded */
-        .loaded .page-loader {
+        body.loaded .page-loader {
             opacity: 0;
             pointer-events: none;
         }
@@ -80,32 +98,51 @@
     <!-- Page Loader -->
     <div class="page-loader">
         <div class="loader-container">
-            <img src="img/icon.png" alt="Company Logo" class="loader-logo">
+            <img src="icon.png" alt="Company Logo" class="loader-logo">
             <div class="loader-ring"></div>
             <div class="loader-ring"></div>
             <div class="loader-ring"></div>
         </div>
     </div>
 
-    <!-- Your page content goes here -->
+    <!-- Your page content -->
     <div class="content">
         <h1>Welcome to Our Website</h1>
-        <p>Your content will appear here after loading.</p>
+        <p>Your content is now fully loaded.</p>
     </div>
 
     <script>
-        // Wait for window load
+        // First make sure content is hidden
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.content').style.display = 'none';
+        });
+
+        // When everything is loaded
         window.addEventListener('load', function() {
+            // Show content
+            document.querySelector('.content').style.display = 'block';
+            
             // Add small delay for smooth transition
             setTimeout(function() {
                 document.body.classList.add('loaded');
                 
                 // Remove loader from DOM after animation completes
                 setTimeout(function() {
-                    document.querySelector('.page-loader').remove();
-                }, 500); // Match this with the CSS transition duration
-            }, 500);
+                    const loader = document.querySelector('.page-loader');
+                    if (loader) loader.remove();
+                }, 500);
+            }, 300);
         });
+
+        // Fallback in case load event doesn't fire
+        setTimeout(function() {
+            if (!document.body.classList.contains('loaded')) {
+                document.body.classList.add('loaded');
+                document.querySelector('.content').style.display = 'block';
+                const loader = document.querySelector('.page-loader');
+                if (loader) loader.remove();
+            }
+        }, 5000); // 5 second timeout
     </script>
 </body>
 </html>
