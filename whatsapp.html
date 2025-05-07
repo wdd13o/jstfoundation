@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Page Loader</title>
+    <title>Premium Page Loader</title>
     <style>
-        /* Reset to ensure no conflicting margins */
-        body, html {
+        /* Reset and base styles */
+        * {
             margin: 0;
             padding: 0;
-            height: 100%;
-            overflow: hidden; /* Prevent scrolling during load */
+            box-sizing: border-box;
         }
-
+        
+        html {
+            height: 100%;
+        }
+        
+        body {
+            min-height: 100%;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+        
         /* Page Loader Styles */
         .page-loader {
             position: fixed;
@@ -20,77 +29,101 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #ffffff;
+            background-color: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 1000;
             opacity: 1;
-            transition: opacity 0.5s ease-out;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
+        
         .loader-container {
             position: relative;
-            width: 120px;
-            height: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 100px;
+            height: 100px;
         }
-
+        
         .loader-logo {
+            position: absolute;
             width: 50px;
             height: 50px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 2;
-            position: relative;
+            animation: pulse 1s ease-in-out infinite alternate;
         }
-
+        
         .loader-ring {
             position: absolute;
             width: 100%;
             height: 100%;
-            border: 4px solid rgba(52, 152, 219, 0.2); /* Light blue ring */
-            border-top-color: #3498db; /* Animated blue */
+            border: 3px solid transparent;
+            border-top-color: #4285f4;
             border-radius: 50%;
-            animation: spin 1.5s linear infinite;
+            animation: spin 0.6s linear infinite;
         }
-
-        /* Secondary ring */
+        
         .loader-ring:nth-child(2) {
             width: 80%;
             height: 80%;
-            border-top-color: #2ecc71; /* Green */
-            animation-duration: 2s;
+            top: 10%;
+            left: 10%;
+            border-top-color: #ea4335;
+            animation-duration: 0.8s;
             animation-direction: reverse;
         }
-
-        /* Tertiary ring */
-        .loader-ring:nth-child(3) {
-            width: 60%;
-            height: 60%;
-            border-top-color: #e74c3c; /* Red */
-            animation-duration: 2.5s;
-        }
-
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Content styles (hidden during load) */
+        
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* Content styles */
         .content {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            padding: 20px;
             display: none;
         }
-
+        
         /* Show content when loaded */
         body.loaded .content {
+            opacity: 1;
+            transform: translateY(0);
             display: block;
         }
-
-        /* Hide loader when loaded */
-        body.loaded .page-loader {
-            opacity: 0;
-            pointer-events: none;
+        
+        /* Demo content styles */
+        .content-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -101,48 +134,73 @@
             <img src="icon.png" alt="Company Logo" class="loader-logo">
             <div class="loader-ring"></div>
             <div class="loader-ring"></div>
-            <div class="loader-ring"></div>
         </div>
     </div>
 
-    <!-- Your page content -->
+    <!-- Page Content -->
     <div class="content">
-        <h1>Welcome to Our Website</h1>
-        <p>Your content is now fully loaded.</p>
+        <section class="content-section">
+            <h1>Welcome to Our Platform</h1>
+            <p>Experience seamless loading and buttery smooth scrolling with our optimized page loader solution.</p>
+        </section>
+        <section class="content-section" style="background-color: #f0f2f5;">
+            <h1>Premium Performance</h1>
+            <p>Our technology ensures your content loads quickly and displays beautifully every time.</p>
+        </section>
+        <section class="content-section">
+            <h1>Ready to Explore?</h1>
+            <p>Scroll smoothly through our carefully crafted user experience.</p>
+        </section>
+        <section class="content-section" style="background-color: #f0f2f5;">
+            <h1>Additional Content</h1>
+            <p>This section ensures the page is scrollable after loading.</p>
+        </section>
     </div>
 
     <script>
-        // First make sure content is hidden
+        // Enhanced loading sequence
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('.content').style.display = 'none';
-        });
-
-        // When everything is loaded
-        window.addEventListener('load', function() {
-            // Show content
-            document.querySelector('.content').style.display = 'block';
+            // Prevent scrolling during load by hiding overflow on html element
+            document.documentElement.style.overflow = 'hidden';
             
-            // Add small delay for smooth transition
+            // Force a reflow to ensure animations start
+            void document.body.offsetWidth;
+            
+            // Fast loading sequence
             setTimeout(function() {
                 document.body.classList.add('loaded');
                 
-                // Remove loader from DOM after animation completes
+                // Remove loader after transition
                 setTimeout(function() {
                     const loader = document.querySelector('.page-loader');
-                    if (loader) loader.remove();
-                }, 500);
-            }, 300);
+                    if (loader) {
+                        loader.style.display = 'none';
+                    }
+                    // Restore scrolling by setting overflow to auto on html element
+                    document.documentElement.style.overflow = 'auto';
+                }, 400);
+            }, 800); // Fast 800ms loading time
+            
+            // Fallback in case of loading issues
+            setTimeout(function() {
+                if (!document.body.classList.contains('loaded')) {
+                    document.body.classList.add('loaded');
+                    document.documentElement.style.overflow = 'auto';
+                    const loader = document.querySelector('.page-loader');
+                    if (loader) loader.style.display = 'none';
+                }
+            }, 3000);
         });
 
-        // Fallback in case load event doesn't fire
-        setTimeout(function() {
-            if (!document.body.classList.contains('loaded')) {
-                document.body.classList.add('loaded');
-                document.querySelector('.content').style.display = 'block';
-                const loader = document.querySelector('.page-loader');
-                if (loader) loader.remove();
-            }
-        }, 5000); // 5 second timeout
+        // Smooth scrolling behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
 </html>

@@ -2,15 +2,7 @@
     "use strict";
 
     // Spinner
-    const spinner = function () {
-        setTimeout(() => {
-            const spinnerEl = $('#spinner');
-            if (spinnerEl.length > 0) {
-                spinnerEl.removeClass('show');
-            }
-        }, 1);
-    };
-    spinner();
+   
 
 
     // Initiate the wowjs
