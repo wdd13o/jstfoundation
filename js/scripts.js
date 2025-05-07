@@ -113,6 +113,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 email: 'mailto:bassanio@example.com'
             }
         },
+
+        {
+            id: 8,
+            name: 'Bundu Kallon',
+            position: 'I.T Specialist',
+            department: 'administration',
+            bio: 'An IT Specialist at JST Foundation, with expertise in technical support, ensuring reliable technology solutions to advance the organization mission',
+            img: 'img/kallon.jpeg',
+            social: {
+                facebook: 'https://www.facebook.com/share/1HuUZDDnNQ/',
+                twitter: '#',
+                linkedin: 'https://www.linkedin.com/in/bundu-kallon-117464241?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+                email: 'kallonbundujr99@gmail.com'
+            }
+        },
         {
             id: 9,
             name: 'Mary Fomba',
