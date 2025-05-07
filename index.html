@@ -140,12 +140,21 @@
 
     <div class="foundation-container">
         <div class="logo-card">
-            <img src="img/jst.jpg" alt="J.S.T Foundation" class="logo-image">
+            <div class="logo-image-container">
+                <picture>
+                    <!-- Modern responsive images with fallbacks -->
+                    <source srcset="jst.webp" type="img/j.jpg">
+                    <source srcset="jst.jpg" type="img/j.jpg"> 
+                    <img src="img/j.jpg" alt="J.S.T Foundation" class="logo-image">
+                </picture>
+                <div class="logo-overlay"></div>
+            </div>
             <div class="top-accent"></div>
             <div class="logo-content">
-                
+              
             </div>
         </div>
+        
         
         
     </div>
