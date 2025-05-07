@@ -30,7 +30,7 @@ body {
     overflow: hidden;
     margin-bottom: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 400px;
+    aspect-ratio: 3/2; /* Maintain aspect ratio */
 }
 
 .logo-card:hover {
@@ -42,16 +42,29 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
+    display: block;
+}
+
+/* Modern background overlay technique */
+.logo-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .logo-content {
     position: relative;
     z-index: 2;
-    padding: 40px;
+    padding: clamp(20px, 5vw, 40px); /* Responsive padding */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -71,7 +84,7 @@ body {
 }
 
 .logo-initials {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 6vw, 3.5rem); /* Fluid typography */
     font-weight: 700;
     color: white;
     margin-bottom: 10px;
@@ -80,7 +93,7 @@ body {
 }
 
 .logo-name {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 600;
     color: white;
     margin-bottom: 20px;
@@ -89,7 +102,7 @@ body {
 }
 
 .logo-tagline {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 30px;
     font-weight: 300;
@@ -111,7 +124,7 @@ body {
 }
 
 .logo-staff {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 3vw, 1.2rem);
     color: white;
     font-weight: 500;
     margin-top: 20px;
@@ -128,12 +141,12 @@ body {
     background: white;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    padding: 40px;
+    padding: clamp(20px, 5vw, 40px);
     margin-top: 30px;
 }
 
 .about-title {
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
     color: #2c3e50;
     margin-bottom: 20px;
     text-align: center;
@@ -145,26 +158,18 @@ body {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
-@media (max-width: 768px) {
-    .logo-initials {
-        font-size: 2.5rem;
-    }
-    
-    .logo-name {
-        font-size: 1.5rem;
-    }
-    
-    .logo-content {
-        padding: 30px 20px;
-    }
-    
+/* Modern image optimization */
+picture {
+    display: contents;
+}
+
+/* Fallback for older browsers */
+@supports not (aspect-ratio: 3/2) {
     .logo-card {
-        min-height: 350px;
-    }
-    
-    .about-section {
-        padding: 30px 20px;
+        height: 0;
+        padding-bottom: 66.66%; /* 3:2 aspect ratio */
     }
 }
