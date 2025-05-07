@@ -1,0 +1,69 @@
+   /* Page Loader Styles */
+   .page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+}
+
+.loader-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.loader-logo {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.loader-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 5px solid transparent;
+    border-top-color: #3498db; /* Change to your brand color */
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+}
+
+.loader-ring:nth-child(2) {
+    border-top-color: #f1c40f; /* Secondary color */
+    animation-delay: 0.3s;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+}
+
+.loader-ring:nth-child(3) {
+    border-top-color: #2ecc71; /* Tertiary color */
+    animation-delay: 0.6s;
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Hide loader when loaded */
+.loaded .page-loader {
+    opacity: 0;
+    pointer-events: none;
+}
