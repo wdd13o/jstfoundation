@@ -1,0 +1,522 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f7f7f7;
+}
+
+header {
+  background: #2d3e50;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+header button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  color: #2d3e50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+header button:hover {
+  background: #e0e0e0;
+}
+
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Video Form Section Styling & Animation */
+#videoFormSection {
+  background: #f4f8fb;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(44,62,80,0.07);
+  padding: 1.5rem 1rem 1.2rem 1rem;
+  margin-bottom: 2rem;
+  animation: fadeInForm 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes fadeInForm {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#videoForm h2 {
+  color: #2d3e50;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+#videoForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#videoForm input[type="text"],
+#videoForm input[type="url"],
+#videoForm select,
+#videoForm input[type="file"] {
+  padding: 0.55rem 0.7rem;
+  border-radius: 5px;
+  border: 1.5px solid #cfd8dc;
+  font-size: 1rem;
+  background: #fff;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+  animation: inputPop 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes inputPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#videoForm input[type="text"]:focus,
+#videoForm input[type="url"]:focus,
+#videoForm select:focus,
+#videoForm input[type="file"]:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px #1976d230;
+}
+
+#videoForm button[type="submit"] {
+  background: linear-gradient(90deg, #1976d2 60%, #2d3e50 100%);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+  transition: background 0.2s, transform 0.13s;
+  animation: buttonPop 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes buttonPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#videoForm button[type="submit"]:hover {
+  background: linear-gradient(90deg, #1565c0 60%, #1a2533 100%);
+  transform: scale(1.04);
+}
+
+#videoForm label {
+  font-weight: 500;
+  color: #2d3e50;
+  margin-bottom: 0.2rem;
+  display: block;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+}
+
+#uploadProgressContainer {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+progress {
+  width: 80%;
+  height: 18px;
+}
+
+#videos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.video-card {
+  background: #f0f0f0;
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1 1 300px;
+  min-width: 250px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.video-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #2d3e50;
+}
+
+.video-card iframe,
+.video-card video {
+  width: 100%;
+  height: 180px;
+  border-radius: 4px;
+  background: #000;
+  margin-bottom: 0.5rem;
+}
+
+.video-card .crud-btns {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.video-card .crud-btns button {
+  padding: 0.3rem 0.7rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: bold;
+  background: #2d3e50;
+  color: #fff;
+  transition: background 0.2s;
+}
+
+.video-card .crud-btns button:hover {
+  background: #1a2533;
+}
+
+.video-card .crud-btns .delete-btn {
+  background: #e74c3c;
+}
+
+.video-card .crud-btns .delete-btn:hover {
+  background: #c0392b;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 350px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-top: 0.5rem;
+}
+
+/* Edit Video Modal Styles */
+#editModal .modal-content {
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 2rem 1.5rem;
+  max-width: 400px;
+  width: 95%;
+}
+
+#editModal h2 {
+  margin-top: 0;
+  color: #2d3e50;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+#editVideoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+#editVideoForm input[type="text"],
+#editVideoForm input[type="url"],
+#editVideoForm select,
+#editVideoForm input[type="file"] {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  font-size: 1rem;
+  background: #fff;
+}
+
+#editVideoForm button[type="submit"] {
+  background: #2d3e50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+
+#editVideoForm button[type="submit"]:hover {
+  background: #1a2533;
+}
+
+#editUploadProgressContainer {
+  margin-top: 0.5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#editUploadProgress {
+  width: 80%;
+  height: 16px;
+}
+
+#editUploadPercent {
+  font-size: 0.95rem;
+  color: #2d3e50;
+}
+
+/* Super User Login Modal Styles */
+#loginModal .modal-content {
+  background: #f4f8fb;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  padding: 2rem 1.5rem;
+  max-width: 350px;
+  width: 95%;
+  position: relative;
+}
+
+#loginModal h2 {
+  margin-top: 0;
+  color: #2d3e50;
+  font-size: 1.25rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+#superUserPassword {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+#submitLogin {
+  width: 100%;
+  background: #2d3e50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.7rem 0;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.2s;
+  margin-bottom: 0.5rem;
+}
+
+#submitLogin:hover {
+  background: #1a2533;
+}
+
+#loginError {
+  color: #e74c3c;
+  font-size: 0.98rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+#loginModal .close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.5rem;
+  color: #2d3e50;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+#loginModal .close:hover {
+  color: #e74c3c;
+}
+
+/* Super User Login Modal Animation */
+#loginModal {
+  animation: fadeInBg 0.4s;
+}
+
+#loginModal .modal-content {
+  animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+  transform: scale(0.95);
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInBg {
+  from { background: rgba(0,0,0,0); }
+  to   { background: rgba(0,0,0,0.5); }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.7) translateY(60px);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05) translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Input focus animation */
+#loginModal input[type="password"]:focus {
+  border-color: #2d3e50;
+  box-shadow: 0 0 0 2px #2d3e5040;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+/* Button press animation */
+#submitLogin:active {
+  transform: scale(0.97);
+  background: #22304a;
+  transition: transform 0.1s, background 0.1s;
+}
+
+/* Close button hover animation */
+#loginModal .close {
+  transition: color 0.2s, transform 0.2s;
+}
+#loginModal .close:hover {
+  color: #e74c3c;
+  transform: rotate(90deg) scale(1.2);
+}
+
+@media (max-width: 900px) {
+  main {
+    max-width: 98vw;
+    margin: 1rem;
+    padding: 0.5rem;
+  }
+  #videos {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.7rem;
+  }
+  header h1 {
+    font-size: 1.2rem;
+  }
+  main {
+    padding: 0.3rem;
+    margin: 0.5rem;
+  }
+  #videoForm {
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: stretch;
+  }
+  #videos {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .video-card iframe,
+  .video-card video {
+    height: 140px;
+  }
+  .modal-content {
+    padding: 1rem;
+    max-width: 98vw;
+  }
+  #editModal .modal-content {
+    padding: 1rem 0.5rem;
+    max-width: 98vw;
+  }
+  #editVideoForm button[type="submit"] {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  #loginModal .modal-content {
+    padding: 1rem 0.5rem;
+    max-width: 98vw;
+  }
+  #submitLogin {
+    padding: 0.6rem 0;
+    font-size: 0.98rem;
+  }
+}
