@@ -461,6 +461,32 @@ progress {
   transform: rotate(90deg) scale(1.2);
 }
 
+/* Super User Login Modal - Centered on Mobile */
+#loginModal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+#loginModal.active {
+  display: flex;
+}
+
+#loginModal .modal-content {
+  margin: 0 auto;
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  transform: none;
+}
+
 @media (max-width: 900px) {
   main {
     max-width: 98vw;
