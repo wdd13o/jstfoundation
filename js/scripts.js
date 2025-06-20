@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 facebook: 'https://www.facebook.com/share/1HuUZDDnNQ/',
                 twitter: '#',
                 linkedin: 'https://www.linkedin.com/in/bundu-kallon-117464241?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-                email: 'kallonbundujr99@gmail.com'
+                email: 'mailto:kallonbundujr99@gmail.com'
             }
         },
         {

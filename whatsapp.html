@@ -1,206 +1,1154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Page Loader</title>
-    <style>
-        /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<section class="donation-section">
+    <div class="container">
+        <h2 class="section-title">Make a Donation</h2>
+        <p class="section-subtitle">Choose your preferred payment method and contribute to our mission of accessible education for all</p>
         
-        html {
-            height: 100%;
-        }
+        <div id="statusMessage" class="status-message"></div>
         
-        body {
-            min-height: 100%;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-        }
+        <div class="donation-container">
+            <div class="donation-options">
+                <h3>Donation Options</h3>
+                
+                <div class="donation-method">
+                    <h4><i class="fas fa-hand-holding-usd"></i> Select Amount</h4>
+                    <div class="donation-amounts">
+                        <div class="amount-option" data-amount="10">$10</div>
+                        <div class="amount-option" data-amount="25">$25</div>
+                        <div class="amount-option" data-amount="50">$50</div>
+                        <div class="amount-option" data-amount="100">$100</div>
+                        <div class="amount-option" data-amount="250">$250</div>
+                        <div class="amount-option" data-amount="500">$500</div>
+                    </div>
+                    <input type="number" id="customAmount" class="custom-amount" placeholder="Or enter custom amount">
+                    <p>All donations are tax-deductible to the extent allowed by law.</p>
+                </div>
+                
+                <div class="donation-method">
+                    <h4><i class="fas fa-gift"></i> Donation Type</h4>
+                    <label for="donationType" class="form-label">Donation Type</label>
+                    <select id="donationType" class="form-control">
+                        <option value="general">General Donation</option>
+                        <option value="scholarship">Scholarship Fund</option>
+                        <option value="technology">Technology Fund</option>
+                        <option value="books">Books and Supplies</option>
+                        <option value="other">Other (please specify)</option>
+                    </select>
+                    <div id="otherSpecifyContainer" style="display: none; margin-top: 15px;">
+                        <input type="text" id="otherSpecify" class="form-control" placeholder="Please specify donation purpose">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-form">
+                <div class="payment-method-tabs">
+                    <div class="payment-tab active" data-tab="credit-card">
+                        <i class="fas fa-credit-card"></i> Credit Card
+                    </div>
+                    <div class="payment-tab" data-tab="orange-money">
+                        <img src="https://1000logos.net/wp-content/uploads/2021/02/Orange-Money-logo-500x336.png" alt="Orange Money" class="orange-money-logo"> Orange Money
+                    </div>
+                    <div class="payment-tab" data-tab="afrimoney">
+                        <img src="" alt="AfriMoney" class="afrimoney-logo"> AfriMoney
+                    </div>
+                    <div class="payment-tab" data-tab="paypal">
+                        <i class="fab fa-paypal"></i> PayPal
+                    </div>
+                    <div class="payment-tab" data-tab="binance">
+                        <img src="https://www.pngall.com/wp-content/uploads/10/Binance-Coin-Crypto-Logo-Background-PNG.png" alt="Binance" class="binance-logo" style="height: 30px;"> Binance
+                    </div>
+                    <!-- Add Bank Transfer Tab -->
+                    <div class="payment-tab" data-tab="bank-transfer">
+                        <i class="fas fa-university"></i> Bank Transfer
+                    </div>
+                </div>
+                
+                <div class="payment-tab-content active" id="credit-card-tab">
+                    <form id="creditCardForm">
+                        <div class="form-group">
+                            <label for="cardType">Card Type</label>
+                            <select id="cardType" class="form-control" required>
+                                <option value="" disabled selected>Select Card Type</option>
+                                <option value="visa">Visa</option>
+                                <option value="mastercard">MasterCard</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" required>
+                            <div class="card-icons">
+                                <img id="visaIcon" src="https://th.bing.com/th/id/OIP.wo1xytw-X_8-xT0kisyn8wHaEK?cb=iwc1&rs=1&pid=ImgDetMain" alt="Visa" style="display: none;">
+                                <img id="masterCardIcon" src="https://th.bing.com/th/id/R.16dbc44d8d44fd6157f722a9674e7b07?rik=cwIfi%2fkXzOul1g&riu=http%3a%2f%2fpngimg.com%2fuploads%2fmastercard%2fmastercard_PNG23.png&ehk=Q6HDF%2fsFcO33WL6NnZl7iIsvV%2fwBz53X15Si%2bbYrrQs%3d&risl=&pid=ImgRaw&r=0" alt="MasterCard" style="display: none;">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardName">Name on Card</label>
+                            <input type="text" id="cardName" class="form-control" placeholder=" eg: JST Foundation" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiry Date</label>
+                                <input type="text" id="cardExpiry" class="form-control" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvc">CVC</label>
+                                <input type="text" id="cardCvc" class="form-control" placeholder="123" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardEmail">Email</label>
+                            <input type="email" id="cardEmail" class="form-control" placeholder="your@email.com" required>
+                        </div>
+                        
+                        <button type="submit" class="btn">Donate Now</button>
+                    </form>
+                </div>
+                
+                <div class="payment-tab-content" id="orange-money-tab">
+                    <form id="orangeMoneyForm">
+                        <div class="form-group">
+                            <label for="omNumber">Orange Money Number</label>
+                            <input type="tel" id="omNumber" class="form-control" placeholder="+232 XX XXX XXXX" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="omName">Full Name</label>
+                            <input type="text" id="omName" class="form-control" placeholder="As registered with Orange Money" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="omEmail">Email (optional)</label>
+                            <input type="email" id="omEmail" class="form-control" placeholder="your@email.com">
+                        </div>
+                        
+                        <button type="submit" class="btn">Proceed to Orange Money</button>
+                    </form>
+                </div>
+                
+                <div class="payment-tab-content" id="afrimoney-tab">
+                    <form id="afrimoneyForm">
+                        <div class="form-group">
+                            <label for="afriNumber">AfriMoney Number</label>
+                            <input type="tel" id="afriNumber" class="form-control" placeholder="+232 XX XXX XXXX" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="afriName">Full Name</label>
+                            <input type="text" id="afriName" class="form-control" placeholder="As registered with AfriMoney" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="afriEmail">Email (optional)</label>
+                            <input type="email" id="afriEmail" class="form-control" placeholder="your@email.com">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-secondary">Proceed to AfriMoney</button>
+                    </form>
+                </div>
+
+                <!-- PayPal Payment Tab -->
+                <div class="payment-tab-content" id="paypal-tab">
+                    <form id="paypalForm">
+                        <div class="form-group">
+                            <label for="paypalEmail">PayPal Email</label>
+                            <input type="email" id="paypalEmail" class="form-control" placeholder="your@email.com" required>
+                        </div>
+                        <button type="submit" class="btn">Proceed to PayPal</button>
+                    </form>
+                </div>
+
+                <!-- Binance Payment Tab -->
+                <div class="payment-tab-content" id="binance-tab">
+                    <form id="binanceForm">
+                        <div class="form-group">
+                            <label for="binanceWallet">Binance Wallet Address</label>
+                            <input type="text" id="binanceWallet" class="form-control" placeholder="Your Binance Wallet Address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="binanceTransactionId">Transaction ID</label>
+                            <input type="text" id="binanceTransactionId" class="form-control" placeholder="Transaction ID" required>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Confirm Binance Payment</button>
+                    </form>
+                </div>
+
+                <!-- Add Bank Transfer Tab Content -->
+                <div class="payment-tab-content" id="bank-transfer-tab">
+                    <form id="bankTransferForm">
+                        <div class="form-group">
+                            <label for="bankAccountName">Account Name</label>
+                            <input type="text" id="bankAccountName" class="form-control" value="J.S.T Foundation" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankAccountNumber">Account Number</label>
+                            <input type="text" id="bankAccountNumber" class="form-control" value="1234567890" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankName">Bank Name</label>
+                            <input type="text" id="bankName" class="form-control" value="Example Bank" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankBranch">Branch</label>
+                            <input type="text" id="bankBranch" class="form-control" value="Main Branch, Freetown" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankSwiftCode">SWIFT Code</label>
+                            <input type="text" id="bankSwiftCode" class="form-control" value="EXAMPLESWIFT" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankTransferReference">Reference</label>
+                            <input type="text" id="bankTransferReference" class="form-control" placeholder="Enter your donation reference" required>
+                        </div>
+                        <p>Please complete the transfer using the details above and include the reference in your transaction.</p>
+                        <button type="submit" class="btn btn-secondary">Confirm Bank Transfer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         
-        /* Page Loader Styles */
-        .page-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 1;
-            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .loader-container {
-            position: relative;
-            width: 100px;
-            height: 100px;
-        }
-        
-        .loader-logo {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            animation: pulse 1s ease-in-out infinite alternate;
-        }
-        
-        .loader-ring {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 3px solid transparent;
-            border-top-color: #4285f4;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-        
-        .loader-ring:nth-child(2) {
-            width: 80%;
-            height: 80%;
-            top: 10%;
-            left: 10%;
-            border-top-color: #ea4335;
-            animation-duration: 0.8s;
-            animation-direction: reverse;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(1); }
-            100% { transform: translate(-50%, -50%) scale(1.05); }
-        }
-        
-        /* Content styles */
-        .content {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            padding: 20px;
-            display: none;
-        }
-        
-        /* Show content when loaded */
-        body.loaded .content {
-            opacity: 1;
-            transform: translateY(0);
-            display: block;
-        }
-        
-        /* Demo content styles */
-        .content-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        p {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
-    <!-- Page Loader -->
-    <div class="page-loader">
-        <div class="loader-container">
-            <img src="icon.png" alt="Company Logo" class="loader-logo">
-            <div class="loader-ring"></div>
-            <div class="loader-ring"></div>
+        <div class="donation-summary">
+            <h3>Donation Summary</h3>
+            <div class="summary-item">
+                <span>Amount:</span>
+                <span id="summaryAmount">$0.00</span>
+            </div>
+            <div class="summary-item">
+                <span>Payment Method:</span>
+                <span id="summaryMethod">Not selected</span>
+            </div>
+            <div class="summary-item">
+                <span>Donation Type:</span>
+                <span id="summaryType">General Donation</span>
+            </div>
+            <div class="summary-item summary-total">
+                <span>Total:</span>
+                <span id="summaryTotal">$0.00</span>
+            </div>
         </div>
     </div>
+</section>
+<style>
+    /* Base Styles */
+.donation-section {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    padding: 40px 0;
+    color: #333;
+}
 
-    <!-- Page Content -->
-    <div class="content">
-        <section class="content-section">
-            <h1>Welcome to Our Platform</h1>
-            <p>Experience seamless loading and buttery smooth scrolling with our optimized page loader solution.</p>
-        </section>
-        <section class="content-section" style="background-color: #f0f2f5;">
-            <h1>Premium Performance</h1>
-            <p>Our technology ensures your content loads quickly and displays beautifully every time.</p>
-        </section>
-        <section class="content-section">
-            <h1>Ready to Explore?</h1>
-            <p>Scroll smoothly through our carefully crafted user experience.</p>
-        </section>
-        <section class="content-section" style="background-color: #f0f2f5;">
-            <h1>Additional Content</h1>
-            <p>This section ensures the page is scrollable after loading.</p>
-        </section>
-    </div>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-    <script>
-        // Enhanced loading sequence
-        document.addEventListener('DOMContentLoaded', function() {
-            // Prevent scrolling during load by hiding overflow on html element
-            document.documentElement.style.overflow = 'hidden';
-            
-            // Force a reflow to ensure animations start
-            void document.body.offsetWidth;
-            
-            // Fast loading sequence
-            setTimeout(function() {
-                document.body.classList.add('loaded');
-                
-                // Remove loader after transition
-                setTimeout(function() {
-                    const loader = document.querySelector('.page-loader');
-                    if (loader) {
-                        loader.style.display = 'none';
-                    }
-                    // Restore scrolling by setting overflow to auto on html element
-                    document.documentElement.style.overflow = 'auto';
-                }, 400);
-            }, 800); // Fast 800ms loading time
-            
-            // Fallback in case of loading issues
-            setTimeout(function() {
-                if (!document.body.classList.contains('loaded')) {
-                    document.body.classList.add('loaded');
-                    document.documentElement.style.overflow = 'auto';
-                    const loader = document.querySelector('.page-loader');
-                    if (loader) loader.style.display = 'none';
-                }
-            }, 3000);
-        });
+.section-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
 
-        // Smooth scrolling behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+.section-subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+/* Status Message */
+.status-message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+
+.status-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.status-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+/* Donation Container */
+.donation-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.donation-options {
+    flex: 1;
+    min-width: 300px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-form {
+    flex: 1;
+    min-width: 300px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.donation-summary {
+    width: 100%;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Donation Options */
+.donation-method {
+    margin-bottom: 25px;
+}
+
+.donation-method h4 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.donation-amounts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.amount-option {
+    padding: 10px 15px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.amount-option:hover {
+    background-color: #e0e0e0;
+}
+
+.amount-option.active {
+    background-color: #3498db;
+    color: white;
+}
+
+.custom-amount {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Form Styles */
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+/* Payment Tabs */
+.payment-method-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.payment-tab {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.payment-tab:hover {
+    background-color: #e0e0e0;
+}
+
+.payment-tab.active {
+    background-color: #3498db;
+    color: white;
+}
+
+.payment-tab-content {
+    display: none;
+}
+
+.payment-tab-content.active {
+    display: block;
+}
+
+.card-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.card-icons img {
+    height: 30px;
+    width: auto;
+}
+
+/* Buttons */
+.btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+.btn-secondary {
+    background-color: #2c3e50;
+}
+
+.btn-secondary:hover {
+    background-color: #1a252f;
+}
+
+/* Donation Summary */
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.summary-total {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #2c3e50;
+    border-bottom: none;
+}
+
+/* Receipt Modal */
+.receipt-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.receipt-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.receipt-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.receipt-header h3 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.receipt-body {
+    margin-bottom: 20px;
+}
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.receipt-total {
+    font-weight: bold;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.receipt-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.close-receipt {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .donation-container {
+        flex-direction: column;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .payment-method-tabs {
+        flex-direction: column;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .donation-amounts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .donation-options, .payment-form {
+        padding: 20px 15px;
+    }
+}
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // DOM Elements
+        const amountOptions = document.querySelectorAll('.amount-option');
+        const customAmountInput = document.getElementById('customAmount');
+        const donationTypeSelect = document.getElementById('donationType');
+        const otherSpecifyContainer = document.getElementById('otherSpecifyContainer');
+        const otherSpecifyInput = document.getElementById('otherSpecify');
+        const paymentTabs = document.querySelectorAll('.payment-tab');
+        const paymentTabContents = document.querySelectorAll('.payment-tab-content');
+        const summaryAmount = document.getElementById('summaryAmount');
+        const summaryMethod = document.getElementById('summaryMethod');
+        const summaryType = document.getElementById('summaryType');
+        const summaryTotal = document.getElementById('summaryTotal');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        // Form elements
+        const creditCardForm = document.getElementById('creditCardForm');
+        const orangeMoneyForm = document.getElementById('orangeMoneyForm');
+        const afrimoneyForm = document.getElementById('afrimoneyForm');
+        const paypalForm = document.getElementById('paypalForm');
+        const binanceForm = document.getElementById('binanceForm');
+        const bankTransferForm = document.getElementById('bankTransferForm');
+        
+        // Card type elements
+        const cardTypeSelect = document.getElementById('cardType');
+        const cardNumberInput = document.getElementById('cardNumber');
+        const visaIcon = document.getElementById('visaIcon');
+        const masterCardIcon = document.getElementById('masterCardIcon');
+        
+        // Receipt modal elements
+        const receiptModal = document.createElement('div');
+        receiptModal.className = 'receipt-modal';
+        receiptModal.innerHTML = `
+            <div class="receipt-content">
+                <div class="receipt-header">
+                    <h3>Donation Receipt</h3>
+                    <p>Thank you for your generous contribution!</p>
+                </div>
+                <div class="receipt-body" id="receiptBody">
+                    <!-- Receipt content will be inserted here -->
+                </div>
+                <div class="receipt-footer">
+                    <p>This receipt serves as confirmation of your donation.</p>
+                    <p>J.S.T Foundation is a registered 501(c)(3) nonprofit organization.</p>
+                </div>
+                <button class="close-receipt">Close</button>
+            </div>
+        `;
+        document.body.appendChild(receiptModal);
+        const closeReceiptBtn = receiptModal.querySelector('.close-receipt');
+        const receiptBody = receiptModal.querySelector('#receiptBody');
+        
+        // Current donation data
+        let currentDonation = {
+            amount: 0,
+            paymentMethod: '',
+            donationType: 'general',
+            customType: '',
+            transactionId: '',
+            donorInfo: {}
+        };
+        
+        // Initialize the form
+        initDonationForm();
+        
+        function initDonationForm() {
+            // Amount selection
+            amountOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    amountOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    customAmountInput.value = '';
+                    updateDonationAmount(parseFloat(this.dataset.amount));
                 });
             });
-        });
-    </script>
-</body>
-</html>
+            
+            // Custom amount input
+            customAmountInput.addEventListener('input', function() {
+                if (this.value) {
+                    amountOptions.forEach(opt => opt.classList.remove('active'));
+                    updateDonationAmount(parseFloat(this.value) || 0);
+                }
+            });
+            
+            // Donation type change
+            donationTypeSelect.addEventListener('change', function() {
+                currentDonation.donationType = this.value;
+                updateSummary();
+                
+                if (this.value === 'other') {
+                    otherSpecifyContainer.style.display = 'block';
+                } else {
+                    otherSpecifyContainer.style.display = 'none';
+                    otherSpecifyInput.value = '';
+                    currentDonation.customType = '';
+                }
+            });
+            
+            // Other specify input
+            otherSpecifyInput.addEventListener('input', function() {
+                currentDonation.customType = this.value;
+            });
+            
+            // Payment method tabs
+            paymentTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    // Update tabs
+                    paymentTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update content
+                    paymentTabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tabId}-tab`) {
+                            content.classList.add('active');
+                        }
+                    });
+                    
+                    // Update payment method in summary
+                    currentDonation.paymentMethod = this.textContent.trim();
+                    updateSummary();
+                });
+            });
+            
+            // Card type change
+            cardTypeSelect.addEventListener('change', function() {
+                visaIcon.style.display = this.value === 'visa' ? 'block' : 'none';
+                masterCardIcon.style.display = this.value === 'mastercard' ? 'block' : 'none';
+            });
+            
+            // Card number formatting
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let matches = value.match(/\d{4,16}/g);
+                let match = matches && matches[0] || '';
+                let parts = [];
+                
+                for (let i=0, len=match.length; i<len; i+=4) {
+                    parts.push(match.substring(i, i+4));
+                }
+                
+                if (parts.length) {
+                    this.value = parts.join(' ');
+                } else {
+                    this.value = value;
+                }
+                
+                // Detect card type if not selected
+                if (!cardTypeSelect.value) {
+                    if (/^4/.test(value)) {
+                        cardTypeSelect.value = 'visa';
+                        visaIcon.style.display = 'block';
+                        masterCardIcon.style.display = 'none';
+                    } else if (/^5[1-5]/.test(value)) {
+                        cardTypeSelect.value = 'mastercard';
+                        visaIcon.style.display = 'none';
+                        masterCardIcon.style.display = 'block';
+                    }
+                }
+            });
+            
+            // Expiry date formatting
+            const cardExpiryInput = document.getElementById('cardExpiry');
+            cardExpiryInput.addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                
+                if (value.length > 2) {
+                    this.value = `${value.substring(0, 2)}/${value.substring(2, 4)}`;
+                }
+            });
+            
+            // Form submissions
+            creditCardForm.addEventListener('submit', handleCreditCardSubmit);
+            orangeMoneyForm.addEventListener('submit', handleMobileMoneySubmit.bind(null, 'orange'));
+            afrimoneyForm.addEventListener('submit', handleMobileMoneySubmit.bind(null, 'afri'));
+            paypalForm.addEventListener('submit', handlePaypalSubmit);
+            binanceForm.addEventListener('submit', handleBinanceSubmit);
+            bankTransferForm.addEventListener('submit', handleBankTransferSubmit);
+            
+            // Close receipt modal
+            closeReceiptBtn.addEventListener('click', function() {
+                receiptModal.style.display = 'none';
+            });
+            
+            // Initialize with first payment method active
+            if (paymentTabs.length > 0) {
+                currentDonation.paymentMethod = paymentTabs[0].textContent.trim();
+                updateSummary();
+            }
+        }
+        
+        function updateDonationAmount(amount) {
+            currentDonation.amount = amount;
+            updateSummary();
+        }
+        
+        function updateSummary() {
+            summaryAmount.textContent = `$${currentDonation.amount.toFixed(2)}`;
+            summaryMethod.textContent = currentDonation.paymentMethod;
+            
+            let donationTypeText = donationTypeSelect.options[donationTypeSelect.selectedIndex].text;
+            if (currentDonation.customType) {
+                donationTypeText += ` (${currentDonation.customType})`;
+            }
+            summaryType.textContent = donationTypeText;
+            
+            summaryTotal.textContent = `$${currentDonation.amount.toFixed(2)}`;
+        }
+        
+        function showStatusMessage(message, isSuccess) {
+            statusMessage.textContent = message;
+            statusMessage.className = isSuccess ? 'status-message success' : 'status-message error';
+            statusMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showReceipt(transactionData) {
+            const date = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            receiptBody.innerHTML = `
+                <div class="receipt-item">
+                    <span>Transaction ID:</span>
+                    <span>${transactionData.transactionId}</span>
+                </div>
+                <div class="receipt-item">
+                    <span>Date:</span>
+                    <span>${date}</span>
+                </div>
+                <div class="receipt-item">
+                    <span>Donor Name:</span>
+                    <span>${transactionData.donorInfo.name || 'Anonymous'}</span>
+                </div>
+                <div class="receipt-item">
+                    <span>Donor Email:</span>
+                    <span>${transactionData.donorInfo.email || 'Not provided'}</span>
+                </div>
+                <div class="receipt-item">
+                    <span>Payment Method:</span>
+                    <span>${transactionData.paymentMethod}</span>
+                </div>
+                <div class="receipt-item">
+                    <span>Donation Type:</span>
+                    <span>${donationTypeSelect.options[donationTypeSelect.selectedIndex].text}${transactionData.customType ? ` (${transactionData.customType})` : ''}</span>
+                </div>
+                <div class="receipt-item receipt-total">
+                    <span>Amount:</span>
+                    <span>$${transactionData.amount.toFixed(2)}</span>
+                </div>
+                <div class="receipt-item">
+                    <span>Status:</span>
+                    <span>Completed</span>
+                </div>
+            `;
+            
+            receiptModal.style.display = 'flex';
+        }
+        
+        // Form Handlers
+        async function handleCreditCardSubmit(e) {
+            e.preventDefault();
+            
+            if (currentDonation.amount <= 0) {
+                showStatusMessage('Please select or enter a donation amount', false);
+                return;
+            }
+            
+            const cardName = document.getElementById('cardName').value;
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, '');
+            const cardExpiry = document.getElementById('cardExpiry').value;
+            const cardCvc = document.getElementById('cardCvc').value;
+            const cardEmail = document.getElementById('cardEmail').value;
+            
+            // Basic validation
+            if (!cardName || !cardNumber || !cardExpiry || !cardCvc || !cardEmail) {
+                showStatusMessage('Please fill in all required fields', false);
+                return;
+            }
+            
+            // Validate card number length
+            if (cardNumber.length < 13 || cardNumber.length > 16) {
+                showStatusMessage('Please enter a valid card number', false);
+                return;
+            }
+            
+            // Validate expiry date
+            const [expMonth, expYear] = cardExpiry.split('/');
+            const currentYear = new Date().getFullYear() % 100;
+            const currentMonth = new Date().getMonth() + 1;
+            
+            if (!expMonth || !expYear || 
+                parseInt(expMonth) < 1 || parseInt(expMonth) > 12 ||
+                parseInt(expYear) < currentYear || 
+                (parseInt(expYear) === currentYear && parseInt(expMonth) < currentMonth)) {
+                showStatusMessage('Please enter a valid expiry date', false);
+                return;
+            }
+            
+            // Validate CVC
+            if (cardCvc.length < 3 || cardCvc.length > 4) {
+                showStatusMessage('Please enter a valid CVC code', false);
+                return;
+            }
+            
+            // Validate email
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cardEmail)) {
+                showStatusMessage('Please enter a valid email address', false);
+                return;
+            }
+            
+            // Update donor info
+            currentDonation.donorInfo = {
+                name: cardName,
+                email: cardEmail
+            };
+            
+            // Simulate API call
+            try {
+                showStatusMessage('Processing your donation...', true);
+                
+                // In a real app, you would call your payment processor API here
+                // This is a simulation with setTimeout
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Generate a fake transaction ID
+                currentDonation.transactionId = 'CC-' + Math.random().toString(36).substring(2, 15).toUpperCase();
+                
+                showStatusMessage('Donation successful! Thank you for your support.', true);
+                showReceipt(currentDonation);
+                
+                // Reset form
+                creditCardForm.reset();
+                visaIcon.style.display = 'none';
+                masterCardIcon.style.display = 'none';
+                amountOptions.forEach(opt => opt.classList.remove('active'));
+                customAmountInput.value = '';
+                currentDonation.amount = 0;
+                updateSummary();
+                
+            } catch (error) {
+                console.error('Payment error:', error);
+                showStatusMessage('Payment failed. Please try again or use a different payment method.', false);
+            }
+        }
+        
+        async function handleMobileMoneySubmit(provider, e) {
+            e.preventDefault();
+            
+            if (currentDonation.amount <= 0) {
+                showStatusMessage('Please select or enter a donation amount', false);
+                return;
+            }
+            
+            const numberField = provider === 'orange' ? 'omNumber' : 'afriNumber';
+            const nameField = provider === 'orange' ? 'omName' : 'afriName';
+            const emailField = provider === 'orange' ? 'omEmail' : 'afriEmail';
+            
+            const number = document.getElementById(numberField).value;
+            const name = document.getElementById(nameField).value;
+            const email = document.getElementById(emailField).value;
+            
+            // Basic validation
+            if (!number || !name) {
+                showStatusMessage('Please fill in all required fields', false);
+                return;
+            }
+            
+            // Validate phone number (basic check)
+            if (number.replace(/\D/g, '').length < 8) {
+                showStatusMessage('Please enter a valid phone number', false);
+                return;
+            }
+            
+            // Validate email if provided
+            if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showStatusMessage('Please enter a valid email address', false);
+                return;
+            }
+            
+            // Update donor info
+            currentDonation.donorInfo = {
+                name: name,
+                email: email || '',
+                phone: number
+            };
+            
+            // Simulate API call
+            try {
+                showStatusMessage(`Redirecting to ${provider === 'orange' ? 'Orange Money' : 'AfriMoney'}...`, true);
+                
+                // In a real app, you would redirect to the mobile money provider or call their API
+                // This is a simulation with setTimeout
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Generate a fake transaction ID
+                currentDonation.transactionId = (provider === 'orange' ? 'OM-' : 'AF-') + 
+                    Math.random().toString(36).substring(2, 10).toUpperCase();
+                
+                showStatusMessage('Donation successful! Thank you for your support.', true);
+                showReceipt(currentDonation);
+                
+                // Reset form
+                e.target.reset();
+                amountOptions.forEach(opt => opt.classList.remove('active'));
+                customAmountInput.value = '';
+                currentDonation.amount = 0;
+                updateSummary();
+                
+            } catch (error) {
+                console.error('Payment error:', error);
+                showStatusMessage('Payment failed. Please try again or use a different payment method.', false);
+            }
+        }
+        
+        async function handlePaypalSubmit(e) {
+            e.preventDefault();
+            
+            if (currentDonation.amount <= 0) {
+                showStatusMessage('Please select or enter a donation amount', false);
+                return;
+            }
+            
+            const paypalEmail = document.getElementById('paypalEmail').value;
+            
+            // Validate email
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(paypalEmail)) {
+                showStatusMessage('Please enter a valid PayPal email address', false);
+                return;
+            }
+            
+            // Update donor info
+            currentDonation.donorInfo = {
+                email: paypalEmail
+            };
+            
+            // Simulate API call
+            try {
+                showStatusMessage('Redirecting to PayPal...', true);
+                
+                // In a real app, you would redirect to PayPal or call their API
+                // This is a simulation with setTimeout
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Generate a fake transaction ID
+                currentDonation.transactionId = 'PP-' + Math.random().toString(36).substring(2, 15).toUpperCase();
+                
+                showStatusMessage('Donation successful! Thank you for your support.', true);
+                showReceipt(currentDonation);
+                
+                // Reset form
+                paypalForm.reset();
+                amountOptions.forEach(opt => opt.classList.remove('active'));
+                customAmountInput.value = '';
+                currentDonation.amount = 0;
+                updateSummary();
+                
+            } catch (error) {
+                console.error('Payment error:', error);
+                showStatusMessage('Payment failed. Please try again or use a different payment method.', false);
+            }
+        }
+        
+        async function handleBinanceSubmit(e) {
+            e.preventDefault();
+            
+            if (currentDonation.amount <= 0) {
+                showStatusMessage('Please select or enter a donation amount', false);
+                return;
+            }
+            
+            const walletAddress = document.getElementById('binanceWallet').value;
+            const transactionId = document.getElementById('binanceTransactionId').value;
+            
+            // Basic validation
+            if (!walletAddress || !transactionId) {
+                showStatusMessage('Please fill in all required fields', false);
+                return;
+            }
+            
+            // Update transaction data
+            currentDonation.transactionId = transactionId;
+            currentDonation.donorInfo = {
+                walletAddress: walletAddress
+            };
+            
+            // Simulate API verification
+            try {
+                showStatusMessage('Verifying Binance transaction...', true);
+                
+                // In a real app, you would verify the transaction with Binance API
+                // This is a simulation with setTimeout
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                showStatusMessage('Donation confirmed! Thank you for your support.', true);
+                showReceipt(currentDonation);
+                
+                // Reset form
+                binanceForm.reset();
+                amountOptions.forEach(opt => opt.classList.remove('active'));
+                customAmountInput.value = '';
+                currentDonation.amount = 0;
+                updateSummary();
+                
+            } catch (error) {
+                console.error('Verification error:', error);
+                showStatusMessage('Transaction verification failed. Please check the details and try again.', false);
+            }
+        }
+        
+        async function handleBankTransferSubmit(e) {
+            e.preventDefault();
+            
+            if (currentDonation.amount <= 0) {
+                showStatusMessage('Please select or enter a donation amount', false);
+                return;
+            }
+            
+            const reference = document.getElementById('bankTransferReference').value;
+            
+            if (!reference) {
+                showStatusMessage('Please enter a payment reference', false);
+                return;
+            }
+            
+            // Update transaction data
+            currentDonation.transactionId = 'BT-' + reference.toUpperCase().replace(/\s+/g, '-');
+            currentDonation.donorInfo = {
+                reference: reference
+            };
+            
+            // Simulate processing
+            try {
+                showStatusMessage('Your bank transfer details have been recorded.', true);
+                
+                // In a real app, you might store this in your database for reconciliation
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                showStatusMessage('Thank you for your donation! Please complete the bank transfer.', true);
+                showReceipt(currentDonation);
+                
+                // Reset form (except bank details which are static)
+                document.getElementById('bankTransferReference').value = '';
+                amountOptions.forEach(opt => opt.classList.remove('active'));
+                customAmountInput.value = '';
+                currentDonation.amount = 0;
+                updateSummary();
+                
+            } catch (error) {
+                console.error('Processing error:', error);
+                showStatusMessage('Error processing your request. Please try again.', false);
+            }
+        }
+    });
+</script>

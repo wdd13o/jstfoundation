@@ -1,0 +1,105 @@
+<!-- Student Report Card Example -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Report Card</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6fa;
+      margin: 0;
+      padding: 40px;
+    }
+    .report-card {
+      background: #fff;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 32px;
+    }
+    .report-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .report-header h2 {
+      margin: 0;
+      color: #2c3e50;
+    }
+    .student-info {
+      margin-bottom: 24px;
+    }
+    .student-info p {
+      margin: 4px 0;
+      color: #34495e;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+    }
+    th, td {
+      border: 1px solid #dfe6e9;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background: #f1f2f6;
+      color: #2d3436;
+    }
+    .grade-A { color: #27ae60; font-weight: bold; }
+    .grade-B { color: #2980b9; font-weight: bold; }
+    .grade-C { color: #f39c12; font-weight: bold; }
+    .grade-D, .grade-F { color: #c0392b; font-weight: bold; }
+    .footer {
+      text-align: right;
+      color: #636e72;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+  <div class="report-card">
+    <div class="report-header">
+      <h2>Student Report Card</h2>
+    </div>
+    <div class="student-info">
+      <p><strong>Name:</strong> Jane Doe</p>
+      <p><strong>Grade:</strong> 10</p>
+      <p><strong>Student ID:</strong> 123456</p>
+    </div>
+    <table>
+      <tr>
+        <th>Subject</th>
+        <th>Grade</th>
+        <th>Comments</th>
+      </tr>
+      <tr>
+        <td>Mathematics</td>
+        <td class="grade-A">A</td>
+        <td>Excellent performance</td>
+      </tr>
+      <tr>
+        <td>English</td>
+        <td class="grade-B">B</td>
+        <td>Good effort</td>
+      </tr>
+      <tr>
+        <td>Science</td>
+        <td class="grade-A">A</td>
+        <td>Outstanding understanding</td>
+      </tr>
+      <tr>
+        <td>History</td>
+        <td class="grade-C">C</td>
+        <td>Needs improvement</td>
+      </tr>
+    </table>
+    <div class="footer">
+      <p>Teacher: Mr. Smith</p>
+      <p>Date: June 16, 2025</p>
+    </div>
+  </div>
+</body>
+</html>
